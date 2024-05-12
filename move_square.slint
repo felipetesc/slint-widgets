@@ -1,0 +1,92 @@
+import { Button } from "std-widgets.slint";
+export component MoveSquare {
+    width: 400px;
+    height: 400px;
+    in-out property <length> _x;
+    in-out property <length> _y;
+    property <bool> change-color;
+    
+    
+    
+    windowArea := Rectangle {
+        background: black;
+        x:root.x;
+        y:root.y;
+        width: root.width;
+        height: root.height;
+    }
+    moveable := Rectangle {
+
+        background: #0000ff;
+        width: 50px;
+        height: 50px;
+        x:_x;
+        y:_y;
+        
+    }
+    TouchArea {
+        
+       
+        width: moveable.width;
+        height: moveable.height;
+
+        x:moveable.x;
+        y:moveable.y;
+
+        clicked => {
+            
+            if(change-color){
+                moveable.background = #ff0000;
+                
+            }
+            else{
+                moveable.background = #0000ff;
+            }
+            change-color = !change-color;
+        }
+    }   
+
+    Button {
+        x:root.width / 2 - 25px;
+        y:0px;
+        width: 50px;
+        height: 50px;
+        text: "N";
+        clicked => {
+            _y = _y - 5px;
+        }
+    }
+    Button {
+        x:root.height - 50px;
+        y:root.width / 2 - 25px;
+        width: 50px;
+        height: 50px;
+        text: "E";
+        clicked => {
+            _x = _x + 5px;
+        }
+    }
+    Button {
+        x:0;
+        y:root.width / 2 - 25px;
+        width: 50px;
+        height: 50px;
+        text: "W";
+        clicked => {
+            _x = _x - 5px;
+        }
+    }
+    Button {
+        x:root.width / 2 - 25px;
+        y:root.height - 50px;
+        width: 50px;
+        height: 50px;
+        text: "S";
+        clicked => {
+            _y = _y + 5px;
+        }
+    }
+    
+    
+    
+}
